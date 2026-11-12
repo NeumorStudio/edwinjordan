@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FiguraVideo } from "@/components/FiguraVideo";
 import { IconoGitHub } from "@/components/Iconos";
 import { Precios } from "@/components/Precios";
 import { PRECIOS, SITIO, SKILLS, VIDEO_EJEMPLO, euros, precioDesde } from "@/lib/datos";
+import { estadoSkill } from "@/lib/github";
 
 const INCLUYE = [
   "El guion del vídeo.",
@@ -20,7 +22,10 @@ const NO_INCLUYE = [
   "Webs, apps, gestión de redes ni anuncios de pago.",
 ];
 
-export default function Inicio() {
+export default async function Inicio() {
+  const estados = await Promise.all(SKILLS.map(estadoSkill));
+  const skillDelEjemplo = SKILLS.find((skill) => skill.ejemplo?.video === VIDEO_EJEMPLO);
+
   return (
     <>
       <section className="portada">
@@ -62,11 +67,11 @@ export default function Inicio() {
             capturas y tus textos, y te monta el vídeo con código.
           </p>
           <div className="skills">
-            {SKILLS.map((skill) => (
+            {SKILLS.map((skill, i) => (
               <article className="tarjeta" key={skill.slug}>
                 <ul className="etiquetas">
                   <li className="etiqueta etiqueta--tinta">Gratis</li>
-                  <li className="etiqueta">v{skill.version}</li>
+                  <li className="etiqueta">v{estados[i].version}</li>
                   {skill.etiquetas.map((etiqueta) => (
                     <li className="etiqueta" key={etiqueta}>
                       {etiqueta}
@@ -75,6 +80,14 @@ export default function Inicio() {
                 </ul>
                 <h3>{skill.nombre}</h3>
                 <p>{skill.resumen}</p>
+                {estados[i].novedades[0]?.fecha && (
+                  <p className="tarjeta__novedad">
+                    Actualizada el {estados[i].novedades[0].fecha}.{" "}
+                    <Link href={`/skills/${skill.slug}#novedades`} className="enlace">
+                      Qué hay de nuevo
+                    </Link>
+                  </p>
+                )}
                 <div className="botones">
                   <a href={skill.enlace} className="boton boton--tinta">
                     <IconoGitHub />
@@ -107,12 +120,19 @@ export default function Inicio() {
           </p>
 
           <div className="encargo-rejilla">
-            <figure className="video">
-              <video controls playsInline preload="none" poster={VIDEO_EJEMPLO.poster} width={720} height={1280}>
-                <source src={VIDEO_EJEMPLO.src} type="video/mp4" />
-              </video>
-              <figcaption>{VIDEO_EJEMPLO.pie}</figcaption>
-            </figure>
+            <FiguraVideo video={VIDEO_EJEMPLO}>
+              {VIDEO_EJEMPLO.pie}.
+              {skillDelEjemplo && (
+                <>
+                  {" "}
+                  Hecha con mi skill gratis{" "}
+                  <Link href={`/skills/${skillDelEjemplo.slug}#ejemplo`} className="enlace">
+                    {skillDelEjemplo.nombre}
+                  </Link>
+                  .
+                </>
+              )}
+            </FiguraVideo>
 
             <div>
               <Precios />

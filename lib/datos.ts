@@ -36,9 +36,23 @@ export type Instalacion = {
   comandos: string[];
 };
 
+export type Video = {
+  src: string;
+  poster: string;
+  pie: string;
+};
+
+// Hecho con la skill video-demo-saas: lo aprendido al hacerlo es la versión 0.3.
+export const VIDEO_EJEMPLO: Video = {
+  src: "/videos/neumorstudio.mp4",
+  poster: "/videos/neumorstudio.jpg",
+  pie: "Intro 3D de NeumorStudio · 34 s · voz generada con IA",
+};
+
 export type Skill = {
   slug: string;
   nombre: string;
+  // Solo de respaldo: la web lee la versión de SKILL.md en GitHub (lib/github.ts).
   version: string;
   etiquetas: string[];
   resumen: string;
@@ -46,13 +60,14 @@ export type Skill = {
   instalacion: Instalacion[];
   necesitas: string[];
   enlace: string;
+  ejemplo?: { video: Video; texto: string };
 };
 
 export const SKILLS: Skill[] = [
   {
     slug: "video-demo-saas",
     nombre: "Vídeo demo de tu producto",
-    version: "0.2",
+    version: "0.3.1",
     etiquetas: ["Remotion", "three.js", "Probada con Claude Code"],
     resumen:
       "Una plantilla de vídeo vertical de 33 s y el método para que tu IA la adapte: tu interfaz real dentro de dispositivos 3D, rótulos que se leen sin sonido y transiciones conectadas.",
@@ -89,16 +104,15 @@ export const SKILLS: Skill[] = [
       "Sonido opcional con ElevenLabs y tu propia clave. Su plan gratis no permite uso comercial.",
     ],
     enlace: "https://github.com/EdwinJordanHerbas/motion-skills/tree/main/skills/video-demo-saas",
+    ejemplo: {
+      video: VIDEO_EJEMPLO,
+      texto:
+        "La intro de NeumorStudio es un mundo 3D en un solo plano, con voz de marca. Lo que aprendí al hacerla con esta skill está en la versión 0.3: sonido inmersivo, una voz con un tono por escena y la marca dicha en español.",
+    },
   },
 ];
 
 export const skillPorSlug = (slug: string) => SKILLS.find((s) => s.slug === slug);
-
-export const VIDEO_EJEMPLO = {
-  src: "/videos/neumorstudio.mp4",
-  poster: "/videos/neumorstudio.jpg",
-  pie: "Ejemplo: presentación de NeumorStudio · 34 s · voz generada con IA",
-};
 
 // Espacio que no se parte (código 160): así «100 €» nunca queda en dos líneas.
 const ESPACIO_FIJO = String.fromCharCode(160);
