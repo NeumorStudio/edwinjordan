@@ -100,4 +100,6 @@ export const VIDEO_EJEMPLO = {
   pie: "Ejemplo: presentación de NeumorStudio · 34 s · voz generada con IA",
 };
 
-export const euros = (n: number) => `${n} €`;
+// Espacio que no se parte (código 160): así «100 €» nunca queda en dos líneas.
+const ESPACIO_FIJO = String.fromCharCode(160);
+export const euros = (n: number) => `${n}${ESPACIO_FIJO}€`;

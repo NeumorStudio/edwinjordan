@@ -44,8 +44,8 @@ export default function Encargo() {
               <dd>+{euros(PRECIOS.extraFormato)}</dd>
             </div>
             <div>
-              <dt>Urgente, 72 h</dt>
-              <dd>+{PRECIOS.urgentePorcentaje} %</dd>
+              <dt>Urgente, 72&nbsp;h</dt>
+              <dd>+{PRECIOS.urgentePorcentaje}&nbsp;%</dd>
             </div>
           </dl>
           {hayLanzamiento() && (

@@ -136,7 +136,7 @@ export default function Inicio() {
               </div>
               <p className="extras texto-suave">
                 Extras: otra versión en cuadrado u horizontal, o una ronda más de cambios, +{euros(PRECIOS.extraFormato)}{" "}
-                cada uno. Urgente en 72 h, +{PRECIOS.urgentePorcentaje} %.
+                cada uno. Urgente en 72&nbsp;h, +{PRECIOS.urgentePorcentaje}&nbsp;%.
               </p>
             </div>
           </div>

@@ -210,7 +210,7 @@ export function Formulario() {
 
       <label className="casilla">
         <input type="checkbox" name="urgente" value="si" defaultChecked={valores?.urgente === "si"} />
-        <span>Lo necesito urgente, en 72 h (+{PRECIOS.urgentePorcentaje} %).</span>
+        <span>Lo necesito urgente, en 72&nbsp;h (+{PRECIOS.urgentePorcentaje}&nbsp;%).</span>
       </label>
 
       {/* Campo trampa: las personas no lo ven; los robots lo rellenan. */}
