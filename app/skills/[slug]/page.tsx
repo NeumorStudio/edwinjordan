@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Comando } from "@/components/Copiar";
+import { FiguraVideo } from "@/components/FiguraVideo";
 import { IconoGitHub } from "@/components/Iconos";
+import { TextoEnLinea } from "@/components/TextoEnLinea";
 import { SKILLS, euros, precioDesde, skillPorSlug } from "@/lib/datos";
+import { enlaceDelRepo, estadoSkill } from "@/lib/github";
 
 // Solo existen las skills de lib/datos.ts; cualquier otra dirección da 404.
 export const dynamicParams = false;
@@ -29,6 +32,8 @@ export default async function PaginaSkill({ params }: Props) {
   const { slug } = await params;
   const skill = skillPorSlug(slug);
   if (!skill) notFound();
+  const estado = await estadoSkill(skill);
+  const resolver = (destino: string) => enlaceDelRepo(skill, destino);
 
   return (
     <div className="contenedor">
@@ -39,7 +44,7 @@ export default async function PaginaSkill({ params }: Props) {
       <header className="skill-cabeza">
         <ul className="etiquetas">
           <li className="etiqueta etiqueta--tinta">Gratis</li>
-          <li className="etiqueta">v{skill.version}</li>
+          <li className="etiqueta">v{estado.version}</li>
           {skill.etiquetas.map((etiqueta) => (
             <li className="etiqueta" key={etiqueta}>
               {etiqueta}
@@ -66,6 +71,16 @@ export default async function PaginaSkill({ params }: Props) {
         </ul>
       </section>
 
+      {skill.ejemplo && (
+        <section className="bloque" id="ejemplo">
+          <h2>Un vídeo hecho con ella</h2>
+          <div className="ejemplo">
+            <FiguraVideo video={skill.ejemplo.video} />
+            <p>{skill.ejemplo.texto}</p>
+          </div>
+        </section>
+      )}
+
       <section className="bloque">
         <h2>Cómo se instala</h2>
         <div className="instalar">
@@ -89,6 +104,37 @@ export default async function PaginaSkill({ params }: Props) {
           ))}
         </ul>
       </section>
+
+      {estado.novedades.length > 0 && (
+        <section className="bloque" id="novedades">
+          <h2>Novedades</h2>
+          {estado.novedades.slice(0, 2).map((version) => (
+            <div className="version" key={version.numero}>
+              <h3>
+                {version.numero}
+                {version.fecha && <span className="texto-suave"> · {version.fecha}</span>}
+              </h3>
+              {version.entrada.map((parrafo) => (
+                <p key={parrafo}>
+                  <TextoEnLinea texto={parrafo} resolver={resolver} />
+                </p>
+              ))}
+              <ul className="puntos">
+                {version.cambios.map((cambio) => (
+                  <li key={cambio}>
+                    <TextoEnLinea texto={cambio} resolver={resolver} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+          <p className="version__todas">
+            <a href={estado.changelog} className="enlace">
+              Todos los cambios, versión a versión
+            </a>
+          </p>
+        </section>
+      )}
 
       <aside className="llamada">
         <h2>¿Prefieres no instalar nada?</h2>

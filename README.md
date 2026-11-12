@@ -30,7 +30,9 @@ Todo está en `lib/datos.ts`:
 - **Plazas de lanzamiento**: baja `PRECIOS.lanzamiento.plazasLibres` en 1 con cada encargo a precio de lanzamiento. A 0, la oferta desaparece de toda la página.
 - **Precios**: `PRECIOS`.
 - **Skills**: añade una entrada a `SKILLS`. Su página sale sola en `/skills/<slug>`.
-- **Vídeo de ejemplo**: `VIDEO_EJEMPLO`, con el archivo en `public/videos/`. Comprimido a 720×1280 para que cargue rápido en móvil.
+- **Vídeo de ejemplo**: `VIDEO_EJEMPLO`, con el archivo en `public/videos/`. Comprimido a 720×1280 para que cargue rápido en móvil. Si una skill tiene `ejemplo`, su página lo enseña como «Un vídeo hecho con ella».
+
+La versión y las novedades de cada skill no se tocan aquí: `lib/github.ts` las lee de `SKILL.md` y `CHANGELOG.md` en el repositorio de las skills, como mucho una vez por hora. Al publicar una versión en GitHub, la web la enseña sola. Si GitHub no responde, sale la `version` de `SKILLS`, que es solo de respaldo.
 
 ## Comprobar antes de publicar
 
