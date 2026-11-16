@@ -49,6 +49,31 @@ export const VIDEO_EJEMPLO: Video = {
   pie: "Intro 3D de NeumorStudio · 34 s · voz generada con IA",
 };
 
+// Cuatro negocios inventados para enseñar el movimiento de interfaz: sin voz, con música y efectos.
+// Llevan el sello «Ejemplo» todo el vídeo. 720×1280 a 60 fps, comprimidos para la web (17 nov 2026).
+export const VIDEOS_EJEMPLO: Video[] = [
+  {
+    src: "/videos/mesa.mp4",
+    poster: "/videos/mesa.jpg",
+    pie: "Mesa · asistente de voz para restaurantes · 27 s",
+  },
+  {
+    src: "/videos/plano.mp4",
+    poster: "/videos/plano.jpg",
+    pie: "Plano · CRM para inmobiliarias · 22 s",
+  },
+  {
+    src: "/videos/mercat.mp4",
+    poster: "/videos/mercat.jpg",
+    pie: "Mercat · la compra del restaurante en el mercado · 31 s",
+  },
+  {
+    src: "/videos/gasto.mp4",
+    poster: "/videos/gasto.jpg",
+    pie: "Gasto · los tickets del autónomo, a la gestoría · 19 s",
+  },
+];
+
 export type Skill = {
   slug: string;
   nombre: string;

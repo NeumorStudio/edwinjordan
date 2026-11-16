@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FiguraVideo } from "@/components/FiguraVideo";
 import { IconoGitHub } from "@/components/Iconos";
 import { Precios } from "@/components/Precios";
-import { PRECIOS, SITIO, SKILLS, VIDEO_EJEMPLO, euros, precioDesde } from "@/lib/datos";
+import { PRECIOS, SITIO, SKILLS, VIDEO_EJEMPLO, VIDEOS_EJEMPLO, euros, precioDesde } from "@/lib/datos";
 import { estadoSkill } from "@/lib/github";
 
 const INCLUYE = [
@@ -174,6 +174,26 @@ export default async function Inicio() {
               Pide tu vídeo
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section id="ejemplos" className="seccion">
+        <div className="contenedor">
+          <p className="antetitulo">Más ejemplos</p>
+          <h2 className="seccion__titulo">Cuatro negocios inventados.</h2>
+          <p className="seccion__entrada">
+            Para enseñar el movimiento de una app me he inventado cuatro empresas, cada una con su marca, su pantalla y
+            su cierre. Van sin voz: solo música y efectos.
+          </p>
+          <div className="ejemplos">
+            {VIDEOS_EJEMPLO.map((video) => (
+              <FiguraVideo key={video.src} video={video} />
+            ))}
+          </div>
+          <p className="seccion__pie">
+            Las empresas, las personas y las cifras son inventadas; por eso llevan el sello «Ejemplo». Música y efectos
+            generados con IA.
+          </p>
         </div>
       </section>
 

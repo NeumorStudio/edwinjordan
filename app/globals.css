@@ -446,6 +446,33 @@ a {
   color: var(--gris-oscuro);
 }
 
+/* Más ejemplos: cuatro vídeos verticales, dos por fila en el móvil y cuatro en escritorio */
+.ejemplos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 16px;
+  margin-top: 32px;
+}
+
+@media (min-width: 860px) {
+  .ejemplos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+.ejemplos .video {
+  max-width: none;
+}
+
+.ejemplos .video video {
+  border-radius: 16px;
+}
+
+.ejemplos .video figcaption {
+  color: var(--gris);
+}
+
 .precios {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
